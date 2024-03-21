@@ -9735,7 +9735,7 @@ Transform:
   m_GameObject: {fileID: 835226543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.92, z: -10}
+  m_LocalPosition: {x: 0, y: 3.83, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13071,7 +13071,7 @@ Transform:
   m_GameObject: {fileID: 1184463545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23467,6 +23467,7 @@ GameObject:
   - component: {fileID: 1912157638}
   - component: {fileID: 1912157637}
   - component: {fileID: 1912157636}
+  - component: {fileID: 1912157641}
   m_Layer: 0
   m_Name: RoueDentelee
   m_TagString: Untagged
@@ -23482,7 +23483,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912157635}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3146d35f275406e45b14aa38d5751b31, type: 2}
   m_CullingMode: 0
@@ -23624,6 +23625,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1912157641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912157635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f5d80664c772a45b3fe2aa36812b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1928031246
 GameObject:
   m_ObjectHideFlags: 0
