@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeplacementsMegaman : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class DeplacementsMegaman : MonoBehaviour
     public float vitesseSaut;   //vitesse de saut désirée
 
     public bool megamanCollision;
+
+    public bool estMort;
+
+    public AudioClip sonMort;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +42,10 @@ public class DeplacementsMegaman : MonoBehaviour
             vitesseX = GetComponent<Rigidbody2D>().velocity.x;  //mémorise vitesse actuelle en X
         }
 
+        Physics2D.OverlapCircle(transform.position, 0.2f);
+
         // sauter l'objet à l'aide la touche "w"
-        if (Input.GetKeyDown("up"))
+        if (Input.GetKeyDown("up") && Physics2D.OverlapCircle(transform.position, 0.2f))
         {
             vitesseY = vitesseSaut;
             GetComponent<Animator>().SetBool("saut", true);
@@ -69,7 +76,7 @@ public class DeplacementsMegaman : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("repos", true);
         }
-
+        
         if (megamanCollision == true)
         {
             GetComponent<Animator>().SetBool("saut", false);
@@ -78,5 +85,27 @@ public class DeplacementsMegaman : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collisionsMegaman)
     {
         megamanCollision = true;
+
+
+        if (Physics2D.OverlapCircle(transform.position, 0.2f))
+        {
+            GetComponent<Animator>().SetBool("saut", false);
+        }
+
+
+        if (collisionsMegaman.gameObject.name == "RoueDentelee")
+        {
+            estMort = true;
+            GetComponent<Animator>().SetBool("mort", true);
+            GetComponent<AudioSource>().PlayOneShot(sonMort);
+            Invoke("RelancerJeu", 2f);
+        }
+    }
+
+    private void RelancerJeu()
+    {
+        SceneManager.LoadScene("Megaman1");
     }
 }
+
+
