@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DeplacementsMegaman : MonoBehaviour
 {
-    float vitesseX;      //vitesse horizontale actuelle
+    float vitesseX;      //vitesse horizontale actuelle 
     public float vitesseXMax;   //vitesse horizontale Maximale désirée
     float vitesseY;      //vitesse verticale 
     public float vitesseSaut;   //vitesse de saut désirée
@@ -13,6 +13,9 @@ public class DeplacementsMegaman : MonoBehaviour
     public bool megamanCollision;
 
     public bool estMort;
+
+    private bool peutAttaquer = true;
+    public float vitesseMaximale;
 
     public AudioClip sonMort;
 
@@ -56,6 +59,20 @@ public class DeplacementsMegaman : MonoBehaviour
             vitesseY = GetComponent<Rigidbody2D>().velocity.y;  //vitesse actuelle verticale
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            peutAttaquer = false;
+            GetComponent<Animator>().SetBool("attaque", true);
+
+            GetComponent<Animator>().SetBool("saut", false);
+            Invoke("possibiliteAttaque",2f);
+
+        }
+
+        if (peutAttaquer)
+        {
+            vitesseX *= 5;
+        }
 
         //Applique les vitesses en X et Y
         GetComponent<Rigidbody2D>().velocity = new Vector2(vitesseX, vitesseY);
@@ -106,6 +123,12 @@ public class DeplacementsMegaman : MonoBehaviour
     {
         SceneManager.LoadScene("Megaman1");
     }
+    private void possibiliteAttaque()
+    {
+        GetComponent<Animator>().SetBool("attaque", false);
+        peutAttaquer = true;
+    }
+
 }
 
 
