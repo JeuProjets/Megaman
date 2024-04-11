@@ -34,7 +34,11 @@ public class DeplacementsMegaman : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SceneManager.LoadScene("Intro");
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("Megaman1");
+        }
     }
 
     // Update is called once per frame
