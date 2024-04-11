@@ -5,19 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class DeplacementsMegaman : MonoBehaviour
 {
+
+    //VARIABLES
     float vitesseX;      //vitesse horizontale actuelle 
     public float vitesseXMax;   //vitesse horizontale Maximale désirée
     float vitesseY;      //vitesse verticale 
     public float vitesseSaut;   //vitesse de saut désirée
 
+    //si Megaman a une collision avec un objet
     public bool megamanCollision;
 
+    //si Megaman est mort
     public bool estMort;
 
+    //Si Megaman peut activer son attaque
     private bool peutAttaquer = true;
+
+    //Si Megaman est en attaque, false au départ
+    public bool enAttaque = false;
+
+    //Vitesse max pour le dash
     public float vitesseMaximale;
 
+    //Son de mort
     public AudioClip sonMort;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +59,7 @@ public class DeplacementsMegaman : MonoBehaviour
 
         Physics2D.OverlapCircle(transform.position, 0.2f);
 
-        // sauter l'objet à l'aide la touche "w"
+        // Saut
         if (Input.GetKeyDown("up") && Physics2D.OverlapCircle(transform.position, 0.2f))
         {
             vitesseY = vitesseSaut;
@@ -58,28 +70,38 @@ public class DeplacementsMegaman : MonoBehaviour
         {
             vitesseY = GetComponent<Rigidbody2D>().velocity.y;  //vitesse actuelle verticale
         }
-
+        //Attaque/dash qui s'active avec espace
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //On met la variable d'attaque à true
+            enAttaque = true;
+
+            //On désactive l'option d'attaquer
             peutAttaquer = false;
+
+            //L'animation d'attaque est à vrai
             GetComponent<Animator>().SetBool("attaque", true);
 
+            //On désactive l'option de sauter
             GetComponent<Animator>().SetBool("saut", false);
-            Invoke("possibiliteAttaque",2f);
+
+            //Appel de la fonction qui permet d'attaquer encore avec un délai
+            Invoke("possibiliteAttaque",0.5f);
 
         }
 
-        if (peutAttaquer)
+        //On augmente la vitesse de Megaman pour l'attaque, avec une vitesse Max
+        if (enAttaque && Mathf.Abs(vitesseX) <= vitesseXMax)
         {
             vitesseX *= 5;
         }
+
 
         //Applique les vitesses en X et Y
         GetComponent<Rigidbody2D>().velocity = new Vector2(vitesseX, vitesseY);
 
 
-        //**************************Gestion des animaitons de course et de repos********************************
-        //Active l'animation de course si la vitesse de déplacement n'est pas 0, sinon le repos sera jouer par Animator
+        //**************************Gestion des animaitons de course, de repos et de saut********************************
         if (vitesseX > 0.9f || vitesseX < -0.9f)
         {
             GetComponent<Animator>().SetBool("marche", true);
@@ -99,34 +121,83 @@ public class DeplacementsMegaman : MonoBehaviour
             GetComponent<Animator>().SetBool("saut", false);
         }
     }
+
+
+    //**************************Gestion des collisions********************************
     void OnCollisionEnter2D(Collision2D collisionsMegaman)
     {
+        //Variable de collision est à vrai
         megamanCollision = true;
 
-
+        
         if (Physics2D.OverlapCircle(transform.position, 0.2f))
         {
+            //On empêche l'option de sauter
             GetComponent<Animator>().SetBool("saut", false);
         }
-
-
+        //Collision ROUES
         if (collisionsMegaman.gameObject.name == "RoueDentelee")
         {
+            //Enregistre qu'il est mort
             estMort = true;
-            GetComponent<Animator>().SetBool("mort", true);
-            GetComponent<AudioSource>().PlayOneShot(sonMort);
-            Invoke("RelancerJeu", 2f);
-        }
-    }
 
+            //Animation mort
+            GetComponent<Animator>().SetBool("mort", true);
+
+            //Son mort
+            GetComponent<AudioSource>().PlayOneShot(sonMort);
+
+            //Appel la fonction qui permet de relancer le jeu avec un délai
+            Invoke("RelancerJeu", 2f);
+
+        }
+        //Collision ABEILLES
+        if (collisionsMegaman.gameObject.name == "Abeille")
+        {
+            //Si il était en train d'attaquer
+            if (enAttaque)
+            {
+                //Animation de collision sur l'ABEILLE
+                collisionsMegaman.gameObject.GetComponent<Animator>().SetTrigger("collision");
+
+                //On détruit l'abeille
+                Destroy(collisionsMegaman.gameObject, 2f);
+            }
+
+
+            else
+            {
+                //Enregistre qu'il est mort
+                estMort = true;
+
+                //Animation mort
+                GetComponent<Animator>().SetBool("mort", true);
+
+                //Son mort
+                GetComponent<AudioSource>().PlayOneShot(sonMort);
+
+                //Appel la fonction qui permet de relancer le jeu avec un délai
+                Invoke("RelancerJeu", 2f);
+            }
+            
+        }
+
+
+
+    }
+    //Fonction qui permet de relancer le jeu 
     private void RelancerJeu()
     {
         SceneManager.LoadScene("Megaman1");
     }
+    
+    
+    //Fonction qui permet à Megaman d'attaquer encore
     private void possibiliteAttaque()
     {
         GetComponent<Animator>().SetBool("attaque", false);
         peutAttaquer = true;
+        enAttaque = false;
     }
 
 }

@@ -17,14 +17,20 @@ public class explosionRoueDentelee : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D infoCollision)
     {
-        // Si le terrain est touché alors active l'animation de l'objet et détruit le
+        // Si collision avec Megaman
         if (infoCollision.gameObject.name == "MegaMan")
         {
+            //Animation d'explosion
             GetComponent<Animator>().enabled = true;
+            //Enlève le collider
             GetComponent<Collider2D>().enabled = false;
+            //Enlève la vélocité
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            //Enlève la vélocité angulaire
             GetComponent<Rigidbody2D>().angularVelocity = 0;
+            //Enlève la gravité
             GetComponent<Rigidbody2D>().gravityScale = 0;
+            //Détruit objet
             Destroy(gameObject, 0.5f);
         }
     }
