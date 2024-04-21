@@ -18,9 +18,6 @@ public class DeplacementsMegaman : MonoBehaviour
     //si Megaman est mort
     public bool estMort;
 
-    //Si Megaman peut activer son attaque
-    private bool peutAttaquer = true;
-
     //Si Megaman est en attaque, false au départ
     public bool enAttaque = false;
 
@@ -30,15 +27,12 @@ public class DeplacementsMegaman : MonoBehaviour
     //Son de mort
     public AudioClip sonMort;
 
+    public AudioClip sonPerdu;
 
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene("Intro");
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("Megaman1");
-        }
+        
     }
 
     // Update is called once per frame
@@ -47,6 +41,7 @@ public class DeplacementsMegaman : MonoBehaviour
         // déplacement vers la gauche
         if (Input.GetKey("left"))
         {
+            vitesseX = -vitesseXMax;
             vitesseX = -vitesseXMax;
             GetComponent<SpriteRenderer>().flipX = true;
 
@@ -69,19 +64,18 @@ public class DeplacementsMegaman : MonoBehaviour
             vitesseY = vitesseSaut;
             GetComponent<Animator>().SetBool("saut", true);
             megamanCollision = false;
+
         }
         else
         {
             vitesseY = GetComponent<Rigidbody2D>().velocity.y;  //vitesse actuelle verticale
+            
         }
         //Attaque/dash qui s'active avec espace
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //On met la variable d'attaque à true
             enAttaque = true;
-
-            //On désactive l'option d'attaquer
-            peutAttaquer = false;
 
             //L'animation d'attaque est à vrai
             GetComponent<Animator>().SetBool("attaque", true);
@@ -180,27 +174,49 @@ public class DeplacementsMegaman : MonoBehaviour
                 //Son mort
                 GetComponent<AudioSource>().PlayOneShot(sonMort);
 
+
                 //Appel la fonction qui permet de relancer le jeu avec un délai
                 Invoke("RelancerJeu", 2f);
             }
             
         }
+        if(collisionsMegaman.gameObject.name == "Trophee")
+        {
+            estMort = false;
+            Destroy(collisionsMegaman.gameObject);
+            Invoke("RelancerJeu", 2f);
+        }
 
 
 
+    }
+
+    void OnTriggerEnter2D(Collider2D collisionsMegaman)
+    {
+        if (collisionsMegaman.gameObject.name == "MeurtVide")
+        {
+            estMort = true;
+            Invoke("RelancerJeu", 2f);
+        }
     }
     //Fonction qui permet de relancer le jeu 
     private void RelancerJeu()
     {
-        SceneManager.LoadScene("Megaman1");
+        if (estMort)
+        {
+            SceneManager.LoadScene("finaleMort");
+        }
+        else
+        {
+            SceneManager.LoadScene("finaleGagne");
+        }
     }
     
-    
+
     //Fonction qui permet à Megaman d'attaquer encore
     private void possibiliteAttaque()
     {
         GetComponent<Animator>().SetBool("attaque", false);
-        peutAttaquer = true;
         enAttaque = false;
     }
 

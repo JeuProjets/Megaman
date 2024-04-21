@@ -8,15 +8,16 @@ public class GestionScenes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("Intro");
-        }
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("Megaman1");
+        }
+
     }
 }

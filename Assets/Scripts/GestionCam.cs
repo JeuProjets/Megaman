@@ -11,7 +11,7 @@ public class GestionCam : MonoBehaviour
     void Start()
     {
 
-        Start();
+        cam1.SetActive(true);
 
     }
 
