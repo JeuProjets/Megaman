@@ -5053,13 +5053,16 @@ GameObject:
   - component: {fileID: 308879660}
   - component: {fileID: 308879659}
   - component: {fileID: 308879658}
+  - component: {fileID: 308879662}
+  - component: {fileID: 308879661}
+  - component: {fileID: 308879663}
   m_Layer: 0
   m_Name: Balle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &308879658
 Animator:
   serializedVersion: 7
@@ -5124,7 +5127,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2022447544217357705, guid: afcfb051195fbd94db19cdd64156adfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5151,6 +5154,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &308879661
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308879657}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &308879662
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308879657}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.095
+--- !u!114 &308879663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308879657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22eb9f1558d9a5e4d9ae6fd7cd8d9a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &312105207
 GameObject:
   m_ObjectHideFlags: 0
@@ -6731,7 +6809,7 @@ GameObject:
   - component: {fileID: 438830873}
   m_Layer: 0
   m_Name: RoueDentelee
-  m_TagString: Untagged
+  m_TagString: mechant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6836,7 +6914,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.43
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -11715,10 +11793,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb97248c5e85624785c6d5a7ea62f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemiACreer: {fileID: 0}
-  personnage: {fileID: 0}
-  limiteGauche: 0
-  limiteDroite: 0
+  ennemiACreer: {fileID: 969833533}
+  personnage: {fileID: 1184463545}
+  limiteGauche: -30.1
+  limiteDroite: 50
 --- !u!4 &897932532
 Transform:
   m_ObjectHideFlags: 0
@@ -11728,7 +11806,7 @@ Transform:
   m_GameObject: {fileID: 897932530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32462898, y: 1.1924953, z: -10.017115}
+  m_LocalPosition: {x: -21.99, y: 5.94, z: -10.017115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14461,7 +14539,7 @@ Transform:
   m_GameObject: {fileID: 1184463545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.99, y: -2.63, z: 0}
+  m_LocalPosition: {x: -16.6, y: -2.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14551,7 +14629,10 @@ MonoBehaviour:
   enAttaque: 0
   vitesseMaximale: 25
   sonMort: {fileID: 8300000, guid: bd56f20d539f58347a2d080d46364f89, type: 3}
-  sonPerdu: {fileID: 0}
+  sonPerdu: {fileID: 8300000, guid: 3909a7f909ce741d59a447712a5755df, type: 3}
+  SonsArme: {fileID: 8300000, guid: cbeda86f54ff38e49ad373965dc9ed11, type: 3}
+  BalleOriginale: {fileID: 308879657}
+  balleClone: {fileID: 0}
 --- !u!82 &1184463552
 AudioSource:
   m_ObjectHideFlags: 0

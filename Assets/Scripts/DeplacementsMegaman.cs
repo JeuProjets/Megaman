@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +30,11 @@ public class DeplacementsMegaman : MonoBehaviour
     public AudioClip sonMort;
 
     public AudioClip sonPerdu;
+    public AudioClip SonsArme;
+
+    public GameObject BalleOriginale;
+    public GameObject balleClone;
+
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +99,37 @@ public class DeplacementsMegaman : MonoBehaviour
         if (enAttaque && Mathf.Abs(vitesseX) <= vitesseXMax)
         {
             vitesseX *= 5;
+        }
+        //Tire de la balle
+        if (Input.GetKeyDown(KeyCode.Return) && enAttaque == false && megamanCollision)
+        {
+            //On déclenche l’animation appropriée(variable tireBalle de l’animation à true).
+            GetComponent<Animator>().SetBool("tireBalle", true);
+
+            //On instancie une balle à partir de la balle d’origine:
+            balleClone = Instantiate(BalleOriginale);
+
+            //Rend active
+            balleClone.SetActive(true);
+
+            GetComponent<AudioSource>().PlayOneShot(SonsArme);
+
+            if (GetComponent<SpriteRenderer>().flipX)
+            {
+                balleClone.transform.position = transform.position + new Vector3(-.6f, 1); 
+                balleClone.GetComponent<Rigidbody2D>().velocity = new Vector2(-25, 0);
+            }
+            else
+            {
+                balleClone.transform.position = transform.position + new Vector3(.6f, 1);
+                balleClone.GetComponent<Rigidbody2D>().velocity = new Vector2(25, 0);
+            }
+            
+
+        }
+        else if(Input.GetKeyUp(KeyCode.Return))
+        {
+            GetComponent<Animator>().SetBool("tireBalle", false);
         }
 
 
