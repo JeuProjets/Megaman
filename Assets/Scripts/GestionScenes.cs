@@ -14,6 +14,7 @@ public class GestionScenes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Scène d'intro --> Scène de jeu
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Megaman1");

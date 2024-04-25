@@ -3794,7 +3794,7 @@ GameObject:
   - component: {fileID: 232243366}
   m_Layer: 0
   m_Name: Abeille
-  m_TagString: Untagged
+  m_TagString: mechant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4027,7 +4027,7 @@ GameObject:
   - component: {fileID: 251887206}
   m_Layer: 0
   m_Name: Abeille
-  m_TagString: Untagged
+  m_TagString: mechant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5058,7 +5058,7 @@ GameObject:
   - component: {fileID: 308879663}
   m_Layer: 0
   m_Name: Balle
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10921,7 +10921,7 @@ Transform:
   m_GameObject: {fileID: 835226543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.83, z: -10}
+  m_LocalPosition: {x: 0, y: 2.29, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11795,8 +11795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemiACreer: {fileID: 969833533}
   personnage: {fileID: 1184463545}
-  limiteGauche: -30.1
-  limiteDroite: 50
+  limiteGauche: -27
+  limiteDroite: 65
 --- !u!4 &897932532
 Transform:
   m_ObjectHideFlags: 0
@@ -11806,7 +11806,7 @@ Transform:
   m_GameObject: {fileID: 897932530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.99, y: 5.94, z: -10.017115}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14539,7 +14539,7 @@ Transform:
   m_GameObject: {fileID: 1184463545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.6, y: -2.87, z: 0}
+  m_LocalPosition: {x: 27.87, y: 0.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25462,7 +25462,7 @@ GameObject:
   - component: {fileID: 1914497238}
   m_Layer: 0
   m_Name: Abeille
-  m_TagString: Untagged
+  m_TagString: mechant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25476,7 +25476,7 @@ Transform:
   m_GameObject: {fileID: 1914497234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.27, y: 1.39, z: 0}
+  m_LocalPosition: {x: 4.21, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,7 +10,7 @@ public class GestionCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //La caméra 1 est celle par défault
         cam1.SetActive(true);
 
     }
@@ -18,6 +18,7 @@ public class GestionCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Gestion des caméras selon la touche appuyée sur le clavier
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             cam1.SetActive(true);

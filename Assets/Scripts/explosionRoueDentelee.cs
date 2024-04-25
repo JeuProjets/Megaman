@@ -18,7 +18,7 @@ public class explosionRoueDentelee : MonoBehaviour
     void OnCollisionEnter2D(Collision2D infoCollision)
     {
         // Si collision avec Megaman
-        if (infoCollision.gameObject.name == "MegaMan")
+        if (infoCollision.gameObject.name == "MegaMan" || infoCollision.gameObject.tag == "Projectile")
         {
             //Animation d'explosion
             GetComponent<Animator>().enabled = true;

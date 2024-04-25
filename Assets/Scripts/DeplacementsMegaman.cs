@@ -26,12 +26,13 @@ public class DeplacementsMegaman : MonoBehaviour
     //Vitesse max pour le dash
     public float vitesseMaximale;
 
-    //Son de mort
+    //SONS
     public AudioClip sonMort;
 
     public AudioClip sonPerdu;
     public AudioClip SonsArme;
 
+    //GAME OBJECTS
     public GameObject BalleOriginale;
     public GameObject balleClone;
 
@@ -112,13 +113,17 @@ public class DeplacementsMegaman : MonoBehaviour
             //Rend active
             balleClone.SetActive(true);
 
+            //Son de la balle
             GetComponent<AudioSource>().PlayOneShot(SonsArme);
 
+            //Direction de la balle selon le flip X de Megaman
+            //Gauche
             if (GetComponent<SpriteRenderer>().flipX)
             {
                 balleClone.transform.position = transform.position + new Vector3(-.6f, 1); 
                 balleClone.GetComponent<Rigidbody2D>().velocity = new Vector2(-25, 0);
             }
+            //Droite
             else
             {
                 balleClone.transform.position = transform.position + new Vector3(.6f, 1);
@@ -127,6 +132,7 @@ public class DeplacementsMegaman : MonoBehaviour
             
 
         }
+        //Arrête le tire
         else if(Input.GetKeyUp(KeyCode.Return))
         {
             GetComponent<Animator>().SetBool("tireBalle", false);
@@ -172,7 +178,7 @@ public class DeplacementsMegaman : MonoBehaviour
             GetComponent<Animator>().SetBool("saut", false);
         }
         //Collision ROUES
-        if (collisionsMegaman.gameObject.name == "RoueDentelee")
+        if (collisionsMegaman.gameObject.name == "RoueDentelee" && enAttaque == false)
         {
             //Enregistre qu'il est mort
             estMort = true;
@@ -205,6 +211,7 @@ public class DeplacementsMegaman : MonoBehaviour
             {
                 //Enregistre qu'il est mort
                 estMort = true;
+ 
 
                 //Animation mort
                 GetComponent<Animator>().SetBool("mort", true);
@@ -218,10 +225,16 @@ public class DeplacementsMegaman : MonoBehaviour
             }
             
         }
+        //Collision trophée = Joueur a gagné
         if(collisionsMegaman.gameObject.name == "Trophee")
         {
+            //Variable mort à false
             estMort = false;
+
+            //On détruie le trophée
             Destroy(collisionsMegaman.gameObject);
+
+            //Gestion de la scène 
             Invoke("RelancerJeu", 2f);
         }
 
@@ -231,13 +244,17 @@ public class DeplacementsMegaman : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collisionsMegaman)
     {
+        //Lorsque Megaman tombe dans le vide
         if (collisionsMegaman.gameObject.name == "MeurtVide")
         {
+            //Il est mort
             estMort = true;
+
+            //On relance le jeu
             Invoke("RelancerJeu", 2f);
         }
     }
-    //Fonction qui permet de relancer le jeu 
+    //Gestion des scènes
     private void RelancerJeu()
     {
         if (estMort)

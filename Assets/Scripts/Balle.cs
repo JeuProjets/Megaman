@@ -18,12 +18,13 @@ public class Balle : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionsBalle)
     {
-        if (collisionsBalle.gameObject.tag == "mechant")
+        //Collision de la balle avec l'abeille
+        if (collisionsBalle.gameObject.name == "Abeille")
         {
-
-            Destroy(collisionsBalle.gameObject, 0.3f);
-
+            //On détruie l'abeille
+            Destroy(collisionsBalle.gameObject, 0.4f);
         }
+        //On détruie la balle
         Destroy(gameObject, 0.15f);
     }
 }

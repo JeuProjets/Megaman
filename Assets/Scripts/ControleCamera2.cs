@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class controleCamera2 : MonoBehaviour
-{
+{   
+    //Cible à suivre: Megaman
     public GameObject cible;
 
+    //Limites de la caméra
     public float limiteHaut;
     public float limiteBas;
     public float limiteGauche;
@@ -15,9 +17,10 @@ public class controleCamera2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //On prend la position de Megaman
         Vector3 positionActuelle = cible.transform.position;
 
-
+        //Détermine les limites
         if (positionActuelle.x < limiteGauche) positionActuelle.x = limiteGauche;
 
         if (positionActuelle.x > limiteDroite) positionActuelle.x = limiteDroite;
